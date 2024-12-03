@@ -65,11 +65,7 @@ export default class extends Controller {
       position: 'left',
       autoPan: false,
     });
-    var sidebarMenu2 = L.control.sidebar('sidebar-menu-2', {
-      position: 'left',
-      autoPan: false,
-    });
-    var sidebars = [sidebarMenu1, sidebarMenu2];
+    var sidebars = [sidebarMenu1];
 
     // Hide all sidebars when clicking the map
     this.map.on('click', function () {
@@ -89,6 +85,7 @@ export default class extends Controller {
       })
       sidebarMenu1.toggle();
     }).addTo(this.map);
+    document.getElementById("sidebar-menu-1").classList.remove("hidden");
 
     // Add markers
     let markers = this.buildMarkers(this.places);
