@@ -1,0 +1,7 @@
+{
+    "scripts": {
+        "dokku": {
+            "predeploy": "RAILS_ENV=production bin/rake assets:clean assets:precompile"
+        }
+    }
+}

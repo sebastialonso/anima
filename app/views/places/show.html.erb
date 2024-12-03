@@ -1,0 +1,105 @@
+<div class="container mx-auto">
+  <div id="alert-border-1" class="flex items-center p-4 mb-4 text-blue-800 border-t-4 border-blue-300 bg-blue-50 dark:text-blue-400 dark:bg-gray-800 dark:border-blue-800" role="alert">
+    <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+      <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+    </svg>
+    <div class="ms-3 text-sm font-medium">
+      Si tienes información para esta animita, escríbime a <b>registro.anima@gmail.com</b> o <b>@anima.registro</b>, incluye el código <%= @place.code %>
+    </div>
+  </div>
+  <div class="my-8 max-w-max p-6 bg-white border border-gray-200 rounded-lg shadow">
+    <div class="px-4 sm:px-0">
+      <h2 class="text-4xl font-bold">Ficha</h2>
+      <% lead = get_lead_name(@place) %>
+      <p class="mt-1 max-w-max text-sm/6"><span class="bg-blue-600 text-white text-m font-bold me-2 px-2.5 py-0.5 rounded"><%= lead[:code] %></span></p>
+      <p class="max-w-max text-sm/6 text-gray-500">Creado el <b><%= get_created_at @place %></b> - Modificado por última vez el <b><%= get_modified_at @place%></b></p>
+
+    </div>
+    <div class="mt-6 border-t border-gray-100">
+      <dl class="divide-y divide-gray-100">
+        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <dt class="text-sm/6 font-medium text-gray-900">Nombre</dt>
+          <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0"><%= get_name @place %></dd>
+        </div>
+        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <dt class="text-sm/6 font-medium text-gray-900">Sujeto</dt>
+          <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0"><%= get_subject @place %></dd>
+        </div>
+        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <dt class="text-sm/6 font-medium text-gray-900">Fechas asociadas</dt>
+          <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0"><%= get_date_info @place %></dd>
+        </div>      
+        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <dt class="text-sm/6 font-medium text-gray-900">Comuna</dt>
+          <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0"><span class="bg-purple-100 text-purple-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-purple-900 dark:text-purple-300"><%= get_county_info @place %></span></dd>
+        </div>
+        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <dt class="text-sm/6 font-medium text-gray-900">Coordenadas aproximadas</dt>
+          <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+            <div class="flex p-4 mb-4 text-sm rounded-lg" role="alert">
+              <div class="relative overflow-x-auto">
+                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">  
+                  <tbody>
+                      <tr class="bg-white border-b">
+                          <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                              Grados decimales
+                          </th>
+                          <td class="px-6 py-4">
+                              <%= get_decimal_degrees @place %>
+                          </td>
+                      </tr>
+                      <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                          <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                              WKT (Well Known Format)
+                          </th>
+                          <td class="px-6 py-4">
+                                <%= get_wkt @place %>
+                          </td>
+                      </tr>
+                      <tr class="bg-white dark:bg-gray-800">
+                          <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                              <a class="font-medium text-blue-600 dark:text-blue-500 hover:underline" href="<%= link_to_google_maps @place %>">Ver en Google Maps</a>
+                          </th>
+                      </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </dd>
+        </div>
+        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <dt class="text-sm/6 font-medium text-gray-900">Historia</dt>
+          <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0"><%= get_description @place %></dd>
+        </div>
+        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <dt class="text-sm/6 font-medium text-gray-900">Fuentes</dt>
+          <% if !@place.sources.empty? %>
+            <dd class="mt-2 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+              <ul role="list" class="divide-y divide-gray-100 rounded-md border border-gray-200">
+                <% @place.sources.each do |source| %>
+                  <li class="flex items-center justify-between py-4 pl-4 pr-5 text-sm/6">
+                  <div class="flex w-0 flex-1 items-center">
+                    <svg class="size-5 shrink-0 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                      <path fill-rule="evenodd" d="M15.621 4.379a3 3 0 0 0-4.242 0l-7 7a3 3 0 0 0 4.241 4.243h.001l.497-.5a.75.75 0 0 1 1.064 1.057l-.498.501-.002.002a4.5 4.5 0 0 1-6.364-6.364l7-7a4.5 4.5 0 0 1 6.368 6.36l-3.455 3.553A2.625 2.625 0 1 1 9.52 9.52l3.45-3.451a.75.75 0 1 1 1.061 1.06l-3.45 3.451a1.125 1.125 0 0 0 1.587 1.595l3.454-3.553a3 3 0 0 0 0-4.242Z" clip-rule="evenodd" />
+                    </svg>
+                    <div class="ml-4 flex min-w-0 flex-1 gap-2">
+                      <span class="truncate font-medium"><%= humanize_source_name source  %></span>
+                      <span class="shrink-0 text-gray-400"><a href="<%= source.link %>" target="_blank">Ver</a></span>
+                    </div>
+                  </div>
+                  <div class="ml-4 shrink-0">
+                    <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500"></a>
+                  </div>
+                </li>
+                <% end %>
+              </ul>
+            <% else %>
+              <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">No hay fuentes</dd>
+            <% end %>
+          </dd>
+        </div>
+      </dl>
+    </div>
+  </div>
+</div>
+

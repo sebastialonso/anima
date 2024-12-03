@@ -1,0 +1,24 @@
+services:
+  web:
+    build: .
+    command: bundle exec rails s -b '0.0.0.0'
+    volumes:
+      - .:/myapp
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+  
+  postgres:
+    build:
+      context: .
+      dockerfile: Dockerfile.pg
+    volumes:
+      - postgres_volume:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=passpass
+      - POSTGRES_USER=animitas
+      - POSTGRES_DB=animitas
+
+volumes:
+  postgres_volume:
