@@ -4,7 +4,7 @@ import L from "leaflet"
 // Connects to data-controller="map"
 export default class extends Controller {
   static targets = ["container", "select", "statsCardinality", "statsSources", "statsWithInstagram"]
-  // static values =  { filterSlug: String }
+  static values =  { placeUrl: String }
 
   initialize() {
     this.selectTarget.selectedIndex = 0;
@@ -30,6 +30,7 @@ export default class extends Controller {
     });
 
     this.createMap()
+    console.info(this.placeUrlValue)
     this.map.setView([-34.223136, -70.980517], 12);
   }
 
@@ -134,16 +135,21 @@ export default class extends Controller {
 
   // Utility functions
   buildMarkers(data) {
+    let URLRegex = /^(.+animitas\/)/g;
+    const matches = this.placeUrlValue.match(URLRegex);
+    console.info(matches[0])
+    const placeURL = matches[0]
+
     return data.map((pos) => {
       let place = pos.place;
       const [latitude, longitude] = place.to_latlon
       if (place.published_status == "IN_REVIEW") {
         var marker = L.marker([latitude, longitude], {icon: this.redIcon}).on('click', function () {
-          window.open(`http://localhost:3000/animitas/${pos.place.code}`); // abre URL en otra pestaña
+          window.open(`${placeURL}${pos.place.code}`); // abre URL en otra pestaña
         })
       } else {
         var marker = L.marker([latitude, longitude]).on('click', function () {
-          window.open(`http://localhost:3000/animitas/${pos.place.code}`); // abre URL en otra pestaña
+          window.open(`${placeURL}${pos.place.code}`); // abre URL en otra pestaña
         })
       }
       return marker

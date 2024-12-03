@@ -22,8 +22,8 @@ default: &default
 
 development:
   <<: *default
+  url: <%= ENV["DATABASE_URL"].sub(/^postgres/, "postgis") %>
   host: postgres
-  encoding: unicode
   username: animitas
   password: passpass
   database: animitas
