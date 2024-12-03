@@ -33,7 +33,7 @@ namespace :import do
 
     raw_places = []
     
-    CSV.foreach(options[:filename], headers: true) do |row|
+    CSV.foreach(options[:filename], encoding: "utf-8", headers: true, liberal_parsing: true) do |row|
       raw_places << row
     end
     
