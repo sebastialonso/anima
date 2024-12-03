@@ -101,8 +101,7 @@ Rails.application.configure do
   #   /.*\.example\.com/ # Allow requests from subdomains like `www.example.com`
   # ]
   config.hosts << "anima.sgm.codes"
-  config.hosts << "IP"
-  config.hosts << "localhost:3000"
+  config.hosts << "137.184.115.76"
   # Skip DNS rebinding protection for the default health check endpoint.
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
 end
