@@ -1,10 +1,24 @@
 <div class="container mx-auto">
-  <div id="alert-border-1" class="flex items-center p-4 mb-4 text-blue-800 border-t-4 border-blue-300 bg-blue-50 dark:text-blue-400 dark:bg-gray-800 dark:border-blue-800" role="alert">
-    <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-      <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
-    </svg>
-    <div class="ms-3 text-sm font-medium">
-      Si tienes información para esta animita, escríbime a <b>registro.anima@gmail.com</b> o <b>@anima.registro</b>, incluye el código <%= @place.code %>
+  <div class="flex flex-col rounded-md mt-4 items-center" role="group">
+    <div>
+      <button type="button" class="px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-s-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700">
+        <a href="<%= animitas_path %>">Ir a lista</a>
+      </button>
+      <button type="button" href="<%= root_path %>" class="px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-e-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700">
+        <a href="<%= root_path %>">Ir a mapa</a>
+      </button>
+    </div>
+  </div>
+
+
+  <div id="alert-border-1" class="flex flex-col text-center items-center p-4 my-4 text-blue-800 border-t-4 border-blue-300 bg-blue-50 dark:text-blue-400 dark:bg-gray-800 dark:border-blue-800" role="alert">
+    <div class="inline-flex">
+      <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+      </svg>
+      <div class="ms-3 text-sm font-medium">
+        Si tienes información para esta animita, escríbeme a <b>registro.anima@gmail.com</b> o <b>@anima.registro</b>, incluye el código <%= @place.code %>
+      </div>
     </div>
   </div>
   <div class="my-8 max-w-max p-6 bg-white border border-gray-200 rounded-lg shadow">
@@ -50,7 +64,7 @@
                       </tr>
                       <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                           <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                              WKT (Well Known Format)
+                              WKT (Well Known Text format)
                           </th>
                           <td class="px-6 py-4">
                                 <%= get_wkt @place %>

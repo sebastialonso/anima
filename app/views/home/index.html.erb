@@ -2,12 +2,12 @@
   <div data-controller="map" data-map-place-url-value="<%= animita_url(id: 1)%>">
     <div id="sidebar-menu-1" class="container mx-auto hidden" style="padding-top: 4rem">
       <h1 class="text-3xl font-bold">Filtrar por comunas</h1>
-      <select data-map-target="select" data-action="change -> map#filterByCounty" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
       <hr class="h-px my-8 bg-gray-200 border-0">
-          <option selected value="ALL">Ver todas</option>
-          <% @counties.each do |county|  %>
-          <option value="<%= county[1] %>"><%= county[0].titleize %></option>
-          <% end %>
+      <select data-map-target="select" data-action="change -> map#filterByCounty" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+        <option selected value="ALL">Ver todas</option>
+        <% @counties.each do |county|  %>
+        <option value="<%= county[1] %>"><%= county[0].titleize %></option>
+        <% end %>
       </select>
       <hr class="h-px my-8 bg-gray-200 border-0">
       <dl class="grid max-w-xl grid-cols-2 gap-8 p-4 mx-auto text-gray-900 sm:grid-cols-2 xl:grid-cols-2sm:p-8">
