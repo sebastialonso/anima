@@ -8,6 +8,7 @@ export default class extends Controller {
 
   initialize() {
     this.selectTarget.selectedIndex = 0;
+    this.defaultZoom = 14;
   }
 
   async connect() {
@@ -31,7 +32,7 @@ export default class extends Controller {
 
     this.createMap()
     console.info(this.placeUrlValue)
-    this.map.setView([-34.223136, -70.980517], 12);
+    this.map.setView([-33.44346588396287, -70.65378058448157], this.defaultZoom);
   }
 
   // Called before map is rendered
@@ -77,15 +78,28 @@ export default class extends Controller {
       this.map.addControl(bar);
     })
 
+    var drawNearLocations = this.drawNearLocations
     // Add menu buttons & sidebar
-    // Button menu 1
-    L.easyButton('fa-filter', function(btn, map){
+    var buttonsBar = []
+    let filterButton = L.easyButton('fa-filter', function(btn, map){
       sidebars.forEach((bar) => {
         bar.hide();
       })
       sidebarMenu1.toggle();
-    }).addTo(this.map);
+    }, 'Filtra por comunas')
     document.getElementById("sidebar-menu-1").classList.remove("hidden");
+    buttonsBar.push(filterButton);
+
+    let findYouButton = L.easyButton('fa-crosshairs', function(btn, map){
+      drawNearLocations(map);
+      sidebars.forEach((bar) => {
+        bar.hide();
+      })
+    }, 'Encuentra cercanos a tu ubicación')
+    buttonsBar.push(findYouButton);
+
+    var editBar = L.easyBar(buttonsBar);
+    editBar.addTo(this.map);
 
     // Add markers
     let markers = this.buildMarkers(this.places);
@@ -127,7 +141,27 @@ export default class extends Controller {
     // Set built marker layer
     this.currentLayer.addTo(this.map);
     // Move map to first marker position
-    this.map.setView(filtered[0].place.to_latlon, 13);
+    this.map.setView(filtered[0].place.to_latlon, this.defaultZoom);
+  }
+
+  drawNearLocations(map) {
+    var defaultRadius = 100;
+    var midRadius = 250;
+    var longRadius = 500;
+    
+    map.locate({setView : true, maxZoom: 14})
+    .on('locationfound', function(e) {
+        L.circle(e.latlng, longRadius, { stroke: false, color: '#386ef7', fillOpacity: 0.2}).addTo(map);
+        L.circle(e.latlng, midRadius, { stroke: false, color: '#ac2bf2', fillOpacity: 0.3}).addTo(map);
+        L.circle(e.latlng, defaultRadius, { stroke: false, color: '#f42929', fillOpacity: 0.4}).addTo(map);
+        //small.bindTooltip(`${small.getRadius()}`, {offset: [small.getRadius()/14, small.getRadius()/14], direction: 'center', permanent: true}).addTo(map);
+        
+     })
+    .on('locationerror', function(e){
+      console.log(e);
+      alert("Location access denied.");
+    });
+    return "HI"
   }
 
   // Utility functions
