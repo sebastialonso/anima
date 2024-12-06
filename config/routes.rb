@@ -7,8 +7,8 @@ Rails.application.routes.draw do
   resources :data, only: :index
   resources :animitas, only: [:index, :show], controller: "places" do
     member do
-      patch "approve" => "places#approve", as: "approve"
-      patch "reject" => "places#reject", as: "reeject"
+      patch "approve" => "places#approve", as: "approve", constraints: lambda { |request| request.format = :json }
+      patch "reject" => "places#reject", as: "reject", constraints: lambda { |request| request.format = :json }
     end
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

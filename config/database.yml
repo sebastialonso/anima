@@ -22,7 +22,7 @@ default: &default
 
 development:
   <<: *default
-  url: <%= ENV["DATABASE_URL"].sub(/^postgres/, "postgis") %>
+  adapter: postgis
   host: postgres
   username: animitas
   password: passpass
@@ -58,8 +58,13 @@ development:
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
+
+# ATTENTION: create this db manually when starting the project form scratch
 test:
   <<: *default
+  host: postgres
+  user: animitas
+  password: passpass
   database: animitas_test
 
 # As with config/credentials.yml, you never want to store sensitive information,
@@ -84,4 +89,4 @@ test:
 #
 production:
   <<: *default
-  url: <%= ENV["DATABASE_URL"].sub(/^postgres/, "postgis") %>
+  url: <%= ENV.fetch("DATABASE_URL", "").sub(/^postgres/, "postgis") %>

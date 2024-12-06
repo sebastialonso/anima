@@ -25,7 +25,7 @@
     <div class="px-4 sm:px-0">
       <h2 class="text-4xl font-bold">Ficha</h2>
       <% lead = get_lead_name(@place) %>
-      <p class="mt-1 max-w-max text-sm/6"><span class="bg-blue-600 text-white text-m font-bold me-2 px-2.5 py-0.5 rounded"><%= lead[:code] %></span></p>
+      <p id="place-code" class="mt-1 max-w-max text-sm/6"><span class="bg-blue-600 text-white text-m font-bold me-2 px-2.5 py-0.5 rounded"><%= lead[:code] %></span></p>
       <p class="max-w-max text-sm/6 text-gray-500">Creado el <b><%= get_created_at @place %></b> - Modificado por última vez el <b><%= get_modified_at @place%></b></p>
 
     </div>
@@ -45,7 +45,7 @@
         </div>      
         <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
           <dt class="text-sm/6 font-medium text-gray-900">Comuna</dt>
-          <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0"><span class="bg-purple-100 text-purple-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-purple-900 dark:text-purple-300"><%= get_county_info @place %></span></dd>
+          <dd id="county-box" class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0"><span class="bg-purple-100 text-purple-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-purple-900 dark:text-purple-300"><%= get_county_info @place %></span></dd>
         </div>
         <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
           <dt class="text-sm/6 font-medium text-gray-900">Coordenadas aproximadas</dt>
@@ -89,9 +89,9 @@
           <dt class="text-sm/6 font-medium text-gray-900">Fuentes</dt>
           <% if !@place.sources.empty? %>
             <dd class="mt-2 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-              <ul role="list" class="divide-y divide-gray-100 rounded-md border border-gray-200">
+              <ul id="sources-list" role="list" class="divide-y divide-gray-100 rounded-md border border-gray-200">
                 <% @place.sources.each do |source| %>
-                  <li class="flex items-center justify-between py-4 pl-4 pr-5 text-sm/6">
+                  <li id="source" class="flex items-center justify-between py-4 pl-4 pr-5 text-sm/6">
                   <div class="flex w-0 flex-1 items-center">
                     <svg class="size-5 shrink-0 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
                       <path fill-rule="evenodd" d="M15.621 4.379a3 3 0 0 0-4.242 0l-7 7a3 3 0 0 0 4.241 4.243h.001l.497-.5a.75.75 0 0 1 1.064 1.057l-.498.501-.002.002a4.5 4.5 0 0 1-6.364-6.364l7-7a4.5 4.5 0 0 1 6.368 6.36l-3.455 3.553A2.625 2.625 0 1 1 9.52 9.52l3.45-3.451a.75.75 0 1 1 1.061 1.06l-3.45 3.451a1.125 1.125 0 0 0 1.587 1.595l3.454-3.553a3 3 0 0 0 0-4.242Z" clip-rule="evenodd" />

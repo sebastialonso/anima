@@ -8,8 +8,8 @@ services:
       - "3000:3000"
     depends_on:
       - postgres
-    environment:
-      - DATABASE_URL=postgres://animitas:passpass@postgres:5432/animitas
+    #environment: # Uncomment for testing production database locally
+      #- DATABASE_URL=postgres://animitas:passpass@postgres:5432/animitas
   
   postgres:
     build:
