@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  resources :mapa, only: :none, controller: "maps" do
+    collection do
+      get '' => 'maps#index', as: ""
+    end
+  end
   resources :data, only: :index
   resources :animitas, only: [:index, :show], controller: "places" do
     member do

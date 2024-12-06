@@ -1,41 +1,38 @@
-<div>
-  <div data-controller="map" data-map-place-url-value="<%= animita_url(id: 1)%>">
-    <div id="sidebar-menu-1" class="container mx-auto hidden" style="padding-top: 4rem">
-      <h1 class="text-3xl font-bold">Filtrar por comunas</h1>
-      <hr class="h-px my-8 bg-gray-200 border-0">
-      <select data-map-target="select" data-action="change -> map#filterByCounty" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-        <option selected value="ALL">Ver todas</option>
-        <% @counties.each do |county|  %>
-        <option value="<%= county[1] %>"><%= county[0].titleize %></option>
-        <% end %>
-      </select>
-      <hr class="h-px my-8 bg-gray-200 border-0">
-      <dl class="grid max-w-xl grid-cols-2 gap-8 p-4 mx-auto text-gray-900 sm:grid-cols-2 xl:grid-cols-2sm:p-8">
-          <div class="flex flex-col items-center justify-center">
-              <dt data-map-target="statsCardinality" class="mb-2 text-3xl font-extrabold">0</dt>
-              <dd class="text-gray-500 dark:text-gray-400">Animitas</dd>
-          </div>
-          <div class="flex flex-col items-center justify-center">
-              <dt class="mb-2 text-3xl font-extrabold">0</dt>
-              <dd class="text-gray-500 dark:text-gray-400">con imágenes aportadas</dd>
-          </div>
-          <div class="flex flex-col items-center justify-center">
-              <dt data-map-target="statsWithInstagram" class="mb-2 text-3xl font-extrabold">0</dt>
-              <dd class="text-gray-500 dark:text-gray-400">con fuentes de Instragram</dd>
-          </div>
-          <div class="flex flex-col items-center justify-center">
-              <dt data-map-target="statsSources" class="mb-2 text-3xl font-extrabold">0</dt>
-              <dd class="text-gray-500 dark:text-gray-400">con más de una fuente</dd>
-          </div>
-      </dl>
+<section class="container mx-auto bg-white">
+    <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:pt-16 lg:px-12">
+        <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl">Anima</h1>
+        <p class="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48">
+          <b>Anima</b> es el primer registro público de animitas en Chile.
+        </p>
+        <p class="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48">
+          Entre los amantes del patrimonio, las animitas cuentan con un nicho conocido por varios, en todas las regiones del país. Muchos intentos se han hecho para visibiizarlas, rastrear sus orígenes, apariciones y llevar su historia. 
+          Sin embargo, no existe una registro público que haya logrado catalogar fielmente ni mucho menos identificarlas individualmente para ser referidas por terceros.
+        </p>
+        <p class="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48">
+          Cada animita en <b>Anima</b> cuenta con un código único que permite identificarla y referirla a sus coordenadas geográficas.
+        </p>
+        <div class="flex flex-col mb-8 lg:mb-16 space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
+            <%# <a href="" class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-500 hover:bg-blue-700 focus:ring-4 focus:ring-primary-300"> %>
+                <%# Cerca tuyo &nbsp; %>
+                <%# <svg class="w-6 h-6 text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"> %>
+                  <%# <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"/> %>
+                <%# </svg> %>
+            <%# </a> %>
+            <a href="<%= mapa_index_path %>" class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg border border-gray-300 bg-blue-500 hover:bg-blue-700 focus:ring-4 focus:ring-gray-100">
+                <span class="fa fa-map"></span>Mapa interactivo &nbsp;
+                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.8 13.938h-.011a7 7 0 1 0-11.464.144h-.016l.14.171c.1.127.2.251.3.371L12 21l5.13-6.248c.194-.209.374-.429.54-.659l.13-.155Z"/>
+                </svg>
+            </a>  
+        </div>
     </div>
-      
-      
 
-      
-        <%# Map %>
-      <div id="map" data-map-target="container"></div>
+    <div class="flex flex-col text-center items-center">
+      <a class="block max-w-lg p-6 bg-blue-50 border border-gray-200 rounded-lg shadow">
+        <h5 class="mb-2 text-2xl font-bold tracking-tight text-blue-500">¿Tienes información o fotos que aportar?</h5>
+        <p class="font-normal text-blue-500">Estamos trabajando para agregar data directo al sitio. Por mientras, manda un mail a <span class="text-blue-800 text-bold">registro.anima@gmail.com</span></p>
+      </a>
+    </div>
   </div>
-</div>
-
-
+</section>
