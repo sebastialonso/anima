@@ -1,4 +1,8 @@
 FactoryBot.define do
+  factory :user do
+    email { "MyString" }
+  end
+
   factory :county do
     name { "Doñihue" }
     code { "DOÑI" }

@@ -79,6 +79,7 @@ GEM
       public_suffix (>= 2.0.2, < 7.0)
     ast (2.4.2)
     base64 (0.2.0)
+    bcrypt (3.1.20)
     benchmark (0.4.0)
     bigdecimal (3.1.8)
     bindex (0.8.1)
@@ -173,6 +174,9 @@ GEM
     parser (3.3.6.0)
       ast (~> 2.4.1)
       racc
+    passwordless (1.8.0)
+      bcrypt (>= 3.1.11)
+      rails (>= 5.1.4)
     pg (1.5.9)
     pry (0.15.0)
       coderay (~> 1.1)
@@ -343,6 +347,7 @@ DEPENDENCIES
   importmap-rails
   jbuilder
   mocha
+  passwordless
   pg (~> 1.1)
   pry
   puma (>= 5.0)

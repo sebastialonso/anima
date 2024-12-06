@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_26_211408) do
+ActiveRecord::Schema[7.2].define(version: 2024_12_06_143833) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
@@ -24,6 +24,20 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_26_211408) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "region_display"
+  end
+
+  create_table "passwordless_sessions", force: :cascade do |t|
+    t.string "authenticatable_type"
+    t.integer "authenticatable_id"
+    t.datetime "timeout_at", precision: nil, null: false
+    t.datetime "expires_at", precision: nil, null: false
+    t.datetime "claimed_at", precision: nil
+    t.string "token_digest", null: false
+    t.string "identifier", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["authenticatable_type", "authenticatable_id"], name: "authenticatable"
+    t.index ["identifier"], name: "index_passwordless_sessions_on_identifier", unique: true
   end
 
   create_table "places", force: :cascade do |t|
@@ -49,6 +63,13 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_26_211408) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["place_id"], name: "index_sources_on_place_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index "lower((email)::text)", name: "index_users_on_lowercase_email", unique: true
   end
 
   add_foreign_key "sources", "places"

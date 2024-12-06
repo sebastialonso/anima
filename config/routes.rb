@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  passwordless_for :users
   resources :mapa, only: :none, controller: "maps" do
     collection do
       get '' => 'maps#index', as: ""

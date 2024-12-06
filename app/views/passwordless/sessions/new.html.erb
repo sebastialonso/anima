@@ -1,0 +1,16 @@
+<div class="container mx-auto my-8">
+  <%= form_with(model: @session, url: url_for(action: 'new'), data: { turbo: 'false' }, class: "max-w-sm mx-auto") do |f| %>
+  <h1 class="text-xl font-bold"> Ingresa como administrador</h1> 
+  <% email_field_name = :"passwordless[#{email_field}]" %>
+  <%= email_field_tag email_field_name,
+      params.fetch(email_field_name, nil),
+      required: true,
+      autofocus: true,
+      placeholder: t("passwordless.sessions.new.email.placeholder"),
+      class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" %>
+
+  <p id="helper-text-explanation" class="mt-2 text-sm text-gray-500">Si tu correo existe en Anima, un código temporal te llegará a tu bandeja de entrada.</p>
+  <%= f.submit "Ingresar", class: "py-3 px-5 font-medium text-center text-white rounded-lg bg-blue-500 hover:bg-blue-700" %>
+  <% end %>
+
+</div>

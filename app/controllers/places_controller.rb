@@ -1,6 +1,7 @@
 class PlacesController < ApplicationController
+  before_action :require_user!, only: [:index]
   before_action :set_place, only: [:show, :approve, :reject]
-
+  
   def index
     @in_review = Place.in_review()
     @in_close_proximity = Place.in_close_proximity

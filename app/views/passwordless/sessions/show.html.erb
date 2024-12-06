@@ -1,0 +1,12 @@
+<div class="container mx-auto my-8">
+<%= form_with(model: @session, url: url_for(action: 'update'), scope: 'passwordless', method: 'patch', data: { turbo: false }, class: "max-w-sm mx-auto") do |f| %>
+  <h1 class="mb-5 text-xl font-bold"> Ingresa código temporal</h1> 
+  <%= f.label :token, "Código" %>
+  <%= f.text_field :token,
+      required: true,
+      autofocus: true,
+      autocomplete: "one-time-code",
+      class: "mb-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" %>
+  <%= f.submit "Confirmar", class: "py-3 px-5 font-medium text-center text-white rounded-lg bg-blue-500 hover:bg-blue-700" %>
+<% end %>
+</div>
