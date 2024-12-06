@@ -77,7 +77,7 @@ Rails.application.configure do
   # Disable caching for Action Mailer templates even if Action Controller
   # caching is enabled.
   config.action_mailer.perform_caching = false
-  config.action_mailer.default_url_options = { host: ENV.fetch("EMAILRB_DOMAIN", ""), port: 80, protocol: "https" }
+  config.action_mailer.default_url_options = { host: ENV.fetch("EMAILRB_DOMAIN", ""), protocol: "https" }
   config.action_mailer.smtp_settings = {
     user_name: ENV.fetch("EMAILRB_USER", ""),
     password: ENV.fetch("EMAILRB_PASSWORD", ""),
