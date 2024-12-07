@@ -9,3 +9,6 @@ application.register("approval", ApprovalController)
 
 import MapController from "./map_controller"
 application.register("map", MapController)
+
+import PlaceController from "./place_controller"
+application.register("place", PlaceController)

@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
   end
 
   def require_user!
-    return if current_user && current_user.admin?
+    return if Rails.env.development? || (current_user && current_user.admin?)
     redirect_to root_path, alert: "You are not worthy!"
   end
 end
