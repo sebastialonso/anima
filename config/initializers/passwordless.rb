@@ -1,4 +1,5 @@
 Passwordless.configure do |config|
+  config.default_from_address = "hola@anima.sgm.codes"
   # after a successful session is set, this will last this amount of time
   config.expires_at = lambda { 2.days.from_now }
   # after successful login, go to this path
