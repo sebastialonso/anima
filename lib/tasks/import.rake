@@ -43,13 +43,14 @@ namespace :import do
       # Build place
       p = Place.new(name: data["name"], notes: data["notes"], lonlat: "POINT(#{data["longitude"]}  #{data["latitude"]})")
 
-      # Build sources based of sources fields and special strings in the "notes" column
+      # Build sources based of sources fields
       p.sources.new(kind: data["source"], link: data["source_link"])
       
+      # Build sources reading special strings in the "notes" column
       if !data["notes"].nil?
-        match = data["notes"].match(Source::LINK_INSTAGRAM_REGEX)
-        if !match.nil?
-          insta_source = p.sources.new(kind: Source::KIND_INSTAGRAM, link: match.named_captures["url"])
+        notes_based_sources = Source.build_args_from_str data["notes"]
+        notes_based_sources.each do |source|
+          p.sources.new(source)
         end
       end
       
