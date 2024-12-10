@@ -13,8 +13,8 @@ class Place < ApplicationRecord
   before_create :set_code
 
   scope :in_review, -> () { where(published_status: PUBLISHED_STATUS_IN_REVIEW) }
-  WITHIN_METERS = "SELECT p1.code AS item, p2.code AS hits from places p1 JOIN places p2 ON ST_DWITHIN(p1.lonlat, p2.lonlat, 14) AND p1.id <> p2.id;"
-  SAME_POINT_QUERY = "SELECT p1.code AS item, p2.code AS hits from places p1 JOIN places p2 ON ST_EQUALS(p1.lonlat::geometry, p2.lonlat::geometry) AND p1.id != p2.id;"
+  WITHIN_METERS = "SELECT p1.code AS item, p2.code AS hits from places p1 JOIN places p2 ON ST_DWITHIN(p1.lonlat, p2.lonlat, 14) AND p1.id <> p2.id AND p2.published_status != 'REJECTED';"
+  SAME_POINT_QUERY = "SELECT p1.code AS item, p2.code AS hits from places p1 JOIN places p2 ON ST_EQUALS(p1.lonlat::geometry, p2.lonlat::geometry) AND p1.id != p2.id AND p2.published_status != 'REJECTED';"
 
   def self.in_close_proximity()
     result = ActiveRecord::Base.connection.execute(WITHIN_METERS)
