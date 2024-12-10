@@ -7,6 +7,6 @@ class User < ApplicationRecord
   passwordless_with :email
 
   def admin?
-    email == ENV["ADMIN_EMAIL"] || "sebagonz91@gmail.com"
+    admin
   end
 end
