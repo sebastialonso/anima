@@ -4,24 +4,22 @@
       <button type="button" class="px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-s-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700">
         <a href="<%= animitas_path %>">Ir a lista</a>
       </button>
-      <button type="button" href="<%= root_path %>" class="px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-e-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700">
-        <a href="<%= root_path %>">Ir a mapa</a>
+      <button type="button" class="px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-e-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700">
+        <a href="<%= mapa_index_path %>">Ir a mapa</a>
       </button>
     </div>
   </div>
-
-
   <div id="alert-border-1" class="flex flex-col text-center items-center p-4 my-4 text-blue-800 border-t-4 border-blue-300 bg-blue-50 dark:text-blue-400 dark:bg-gray-800 dark:border-blue-800" role="alert">
     <div class="inline-flex">
       <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
         <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
       </svg>
       <div class="ms-3 text-sm font-medium">
-        Si tienes información para esta animita, escríbeme a <b>registro.anima@gmail.com</b> o <b>@anima.registro</b>, incluye el código <%= @place.code %>
+        Si tienes información para esta animita, escríbeme a <b>registro.anima@gmail.com</b>, incluye el código <%= @place.code %>
       </div>
     </div>
   </div>
-  <div class="my-8 max-w-max p-6 bg-white border border-gray-200 rounded-lg shadow">
+  <div class="my-8 max-w-xxl p-6 bg-white border border-gray-200 rounded-lg shadow">
     <div class="px-4 sm:px-0">
       <h2 class="text-4xl font-bold">Ficha</h2>
       <% lead = get_lead_name(@place) %>
@@ -85,42 +83,7 @@
           <dt class="text-sm/6 font-medium text-gray-900">Historia</dt>
           <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0"><%= get_description @place %></dd>
         </div>
-        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-          <dt class="text-sm/6 font-medium text-gray-900">Fuentes</dt>
-          <% if !@place.sources.empty? %>
-            <dd class="mt-2 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-              <ul id="sources-list" role="list" class="divide-y divide-gray-100 rounded-md border border-gray-200">
-                <% @place.sources.each do |source| %>
-                  <li id="source" class="flex items-center justify-between py-4 pl-4 pr-5 text-sm/6">
-                  <div class="flex w-0 flex-1 items-center">
-                    <% if source.is_geographic? %>
-                    <div id="source-content-<%= source.id %>" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 tooltip">
-                        Esta fuente entrega coordenadas geográficas
-                    </div>
-                    <svg data-place-target="tooltip" data-source-id="<%= source.id%>" class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                      <path fill-rule="evenodd" d="M11.906 1.994a8.002 8.002 0 0 1 8.09 8.421 7.996 7.996 0 0 1-1.297 3.957.996.996 0 0 1-.133.204l-.108.129c-.178.243-.37.477-.573.699l-5.112 6.224a1 1 0 0 1-1.545 0L5.982 15.26l-.002-.002a18.146 18.146 0 0 1-.309-.38l-.133-.163a.999.999 0 0 1-.13-.202 7.995 7.995 0 0 1 6.498-12.518ZM15 9.997a3 3 0 1 1-5.999 0 3 3 0 0 1 5.999 0Z" clip-rule="evenodd"/>
-                    </svg>
-                    <% else  %>
-                    <svg class="size-5 shrink-0 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
-                      <path fill-rule="evenodd" d="M15.621 4.379a3 3 0 0 0-4.242 0l-7 7a3 3 0 0 0 4.241 4.243h.001l.497-.5a.75.75 0 0 1 1.064 1.057l-.498.501-.002.002a4.5 4.5 0 0 1-6.364-6.364l7-7a4.5 4.5 0 0 1 6.368 6.36l-3.455 3.553A2.625 2.625 0 1 1 9.52 9.52l3.45-3.451a.75.75 0 1 1 1.061 1.06l-3.45 3.451a1.125 1.125 0 0 0 1.587 1.595l3.454-3.553a3 3 0 0 0 0-4.242Z" clip-rule="evenodd" />
-                    </svg>
-                    <% end %>
-                    <div class="ml-4 flex min-w-0 flex-1 gap-2">
-                      <span class="truncate font-medium"><%= humanize_source_name source  %></span>
-                      <span class="shrink-0 text-gray-400"><a href="<%= source.link %>" target="_blank">Ver</a></span>
-                    </div>
-                  </div>
-                  <div class="ml-4 shrink-0">
-                    <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500"></a>
-                  </div>
-                </li>
-                <% end %>
-              </ul>
-            <% else %>
-              <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">No hay fuentes</dd>
-            <% end %>
-          </dd>
-        </div>
+        <%= render partial: "sources", locals: {sources: @place.sources}%>
       </dl>
     </div>
   </div>

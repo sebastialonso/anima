@@ -44,7 +44,7 @@ namespace :import do
       p = Place.new(name: data["name"], notes: data["notes"], lonlat: "POINT(#{data["longitude"]}  #{data["latitude"]})")
 
       # Build sources based of sources fields
-      p.sources.new(kind: data["source"], link: data["source_link"])
+      p.sources.new(kind: data["source"], link: data["source_link"], description: data["source_description"])
       
       # Build sources reading special strings in the "notes" column
       if !data["notes"].nil?

@@ -54,6 +54,8 @@ module PlacesHelper
       "Punto en Google Street View"
     when Source::KIND_INSTAGRAM
       "Post en Instagram"
+    when Source::KIND_DIA
+      "Declaración de Impacto Ambiental - Servicio de Evaluación Ambiental"
     else
       "Fuente no reconocida"
     end

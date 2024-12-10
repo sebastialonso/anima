@@ -39,4 +39,8 @@ class Source < ApplicationRecord
   def is_geographic?
     kind == KIND_GOOGLE_STREETVIEW || kind == KIND_DIA
   end
+
+  def is_dia?
+    kind == KIND_DIA
+  end
 end
