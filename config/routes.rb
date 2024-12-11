@@ -5,7 +5,7 @@ Rails.application.routes.draw do
       get '' => 'maps#index', as: ""
     end
   end
-  resources :data, only: :index
+  resources :data, only: :index, constraints: lambda { |request| request.format = :json }
   resources :animitas, only: [:index, :show], controller: "places" do
     member do
       patch "approve" => "places#approve", as: "approve", constraints: lambda { |request| request.format = :json }

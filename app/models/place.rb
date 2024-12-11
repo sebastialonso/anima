@@ -6,6 +6,10 @@ class Place < ApplicationRecord
   PUBLISHED_STATUS_REJECTED = "REJECTED"
   PUBLISHED_STATUS_ALLOWED = [PUBLISHED_STATUS_IN_REVIEW, PUBLISHED_STATUS_ACCEPTED, PUBLISHED_STATUS_REJECTED]
   
+  STATUS_ACTIVE = "ACTIVE"
+  STATUS_DAMAGED = "DAMAGED"
+  STATUS_GONE = "GONE"
+
   has_many :sources
   validates :published_status, inclusion: { in: PUBLISHED_STATUS_ALLOWED }
   validates :lonlat, presence: true

@@ -68,4 +68,56 @@ module PlacesHelper
   def get_modified_at place
     place.updated_at.strftime("%d-%m-%Y %H:%M")
   end
+
+  def get_humanized_status place
+    case place.status
+    when Place::STATUS_ACTIVE
+      "Activa"
+    when Place::STATUS_DAMAGED
+      "Dañada/Abandonada"
+    when Place::STATUS_GONE
+      "Desaparecida"
+    else
+      "Estado no válido"
+    end
+  end
+
+  def get_status_text place
+    case place.status
+    when Place::STATUS_ACTIVE
+      "La animita está en buen estado"
+    when Place::STATUS_DAMAGED
+      "La animita tiene daños o ha sido abandonada"
+    when Place::STATUS_GONE
+      "La animita no está en el último lugar reportado"
+    else
+      "Estado no válido"
+    end
+  end
+
+  def get_published_status_text place
+    case place.published_status
+    when Place::PUBLISHED_STATUS_ACCEPTED
+      "Publicada"
+    when Place::PUBLISHED_STATUS_IN_REVIEW
+      "En revisión"
+    when Place::PUBLISHED_STATUS_REJECTED
+      "Rechazada"
+    else
+      "Estado no válido"
+    end
+  end
+
+  def get_humanized_published_status place
+    case place.published_status
+    when Place::PUBLISHED_STATUS_ACCEPTED
+      "La entrada ha sido aprobada y publicada"
+    when Place::PUBLISHED_STATUS_IN_REVIEW
+      "La entrada se encuentra en revisión"
+    when Place::PUBLISHED_STATUS_REJECTED
+      "La entrada ha sido rechazada porque no entrega información nueva o relevante"
+    else
+      "Estado no válido"
+    end
+  end
 end

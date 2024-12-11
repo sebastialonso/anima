@@ -1,6 +1,7 @@
 FactoryBot.define do
   factory :user do
-    email { "MyString" }
+    email { "some@email.com" }
+    admin { true }
   end
 
   factory :county do

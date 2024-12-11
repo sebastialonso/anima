@@ -20,13 +20,7 @@
     </div>
   </div>
   <div class="my-8 max-w-xxl p-6 bg-white border border-gray-200 rounded-lg shadow">
-    <div class="px-4 sm:px-0">
-      <h2 class="text-4xl font-bold">Ficha</h2>
-      <% lead = get_lead_name(@place) %>
-      <p id="place-code" class="mt-1 max-w-max text-sm/6"><span class="bg-blue-600 text-white text-m font-bold me-2 px-2.5 py-0.5 rounded"><%= lead[:code] %></span></p>
-      <p class="max-w-max text-sm/6 text-gray-500">Creado el <b><%= get_created_at @place %></b> - Modificado por última vez el <b><%= get_modified_at @place%></b></p>
-
-    </div>
+    <%= render partial: "headers", locals: {place: @place} %>
     <div class="mt-6 border-t border-gray-100">
       <dl class="divide-y divide-gray-100">
         <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">

@@ -5,6 +5,9 @@ require "rails/test_help"
 # mock and stub things
 require 'mocha/minitest'
 
+# sign-in helpers
+require "passwordless/test_helpers"
+
 # coverage
 require 'simplecov'
 SimpleCov.start

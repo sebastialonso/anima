@@ -1,13 +1,21 @@
 require "test_helper"
 
 class PlacesControllerTest < ActionDispatch::IntegrationTest
-  test "should get index" do
+  test "if admin - should get index" do
     get animitas_url
-    
+    u = create(:user)
+    passwordless_sign_in(u)
+
     assert_response :success
     assert_not_nil assigns(:in_review)
     assert_not_nil assigns(:same_place)
     assert_not_nil assigns(:in_close_proximity)
+  end
+
+  test "if not admin should redirect to root" do
+    get animitas_url
+    
+    assert_redirected_to root_path
   end
 
   test "should get show" do
@@ -21,14 +29,19 @@ class PlacesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_not_nil assigns(:place)
 
+    assert_template partial: '_headers'
+    assert_template partial: '_sources'
+
     assert_select "#place-code", place.code
     assert_select "#county-box", /#{county.name}.*/
     assert_select "#county-box", /#{county.region_display}.*/
+    assert_select "#place-published-status[data-status=?]", place.published_status
+    assert_select "#place-status[data-status=?]", place.status
 
 
-    assert_select "ul#sources-list" do
-      assert_select "li#source", {count: 2}
-      assert_select "li a", { text: "Ver", count: place.sources.size }
+    assert_select "#sources-accordion" do
+      assert_select "h2[data-place-target='accordion']", {count: place.sources.size}
+      assert_select "div.hidden", { count: place.sources.size }
     end
   end
 

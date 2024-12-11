@@ -1,0 +1,14 @@
+<div class="px-4 sm:px-0">
+  <h2 class="text-4xl font-bold">Ficha</h2>
+  <% lead = get_lead_name(place) %>
+  <p id="place-code" class="mt-1 max-w-max text-sm/6"><span class="bg-blue-600 text-white text-m font-bold me-2 px-2.5 py-0.5 rounded"><%= lead[:code] %></span></p>
+  <p class="max-w-max text-sm/6 text-gray-500">Creado el <b><%= get_created_at place %></b> - Modificado por última vez el <b><%= get_modified_at place%></b></p>
+  <div id="tooltip-place-status" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 tooltip">
+    <%= get_status_text place %>
+  </div>
+  <span id="place-status" data-status="<%= place.status %>" class="text-sm border font-medium me-2 px-2.5 py-0.5 rounded"><%= get_humanized_status place %></span>
+  <div id="tooltip-place-published-status" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 tooltip">
+    <%= get_humanized_published_status place %>
+  </div>
+  <span id="place-published-status" data-status="<%= place.published_status %>" class="text-sm border font-medium me-2 px-2.5 py-0.5 rounded"><%= get_published_status_text place %></span>
+</div>
